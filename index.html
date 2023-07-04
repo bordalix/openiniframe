@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <p>Open url in iframe: <input /> <button>Go</button></p>
+    <iframe></iframe>
+    <script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+        const button = document.getElementsByTagName('button')[0]
+        const iframe = document.getElementsByTagName('iframe')[0]
+        const input = document.getElementsByTagName('input')[0]
+        const url = new URL(location.href).searchParams.get('url')
+        if (url) {
+          iframe.src = url.match(/^http/) ? url : 'https://' + url
+        }
+        button.onclick = () => {
+          const newurl = location.pathname + '?url=' + input.value
+          window.location.replace(newurl)
+        }
+      })
+    </script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      iframe {
+        height: 100vh;
+        width: 100vw;
+      }
+      p {
+        padding: 0 2rem;
+      }
+    </style>
+  </body>
+</html>
